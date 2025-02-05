@@ -403,3 +403,67 @@ footer {
       height: 20px;
   }
 }
+
+footer {
+  background-color: #0a0a3c;
+  color: white;
+  text-align: center;
+  padding: 20px 10px;
+  margin-top: 30px;
+  font-size: 16px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+.footer-content a {
+  color: skyblue;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-content a:hover {
+  color: dodgerblue;
+  text-decoration: underline;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.social-icons img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+  footer {
+      font-size: 14px;
+      padding: 15px;
+  }
+
+  .social-icons img {
+      width: 20px;
+      height: 20px;
+  }
+}
+
