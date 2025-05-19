@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Lemon - Table Booking</title>
+    <style>
+        /* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+/* Header and Navigation */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 60px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    background-color: #f0f0f0;
+    color: #495E57;
+}
+
+/* Main Content */
+main {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.booking-section {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #495E57;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #495E57;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #495E57;
+    box-shadow: 0 0 0 2px rgba(73, 94, 87, 0.2);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.submit-btn {
+    background-color: #495E57;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #3d4c47;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #fff;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .booking-section {
+        padding: 1.5rem;
+    }
+
+    main {
+        padding: 0 1rem;
+    }
+}
+
+/* Accessibility */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+    outline: 2px solid #495E57;
+    outline-offset: 2px;
+}
+
+/* Form validation styles */
+input:invalid,
+select:invalid,
+textarea:invalid {
+    border-color: #dc3545;
+}
+
+input:valid,
+select:valid,
+textarea:valid {
+    border-color: #28a745;
+} 
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="https://placehold.co/200x100" alt="Little Lemon Logo">
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#booking" class="active">Book a Table</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="booking-section">
+            <h1>Book Your Table</h1>
+            <form id="bookingForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                    <span class="error-message" id="nameError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" name="date" required>
+                    <span class="error-message" id="dateError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="time">Time *</label>
+                    <input type="time" id="time" name="time" required>
+                    <span class="error-message" id="timeError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Number of Guests *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select number of guests</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="3">3 People</option>
+                        <option value="4">4 People</option>
+                        <option value="5">5 People</option>
+                        <option value="6">6 People</option>
+                    </select>
+                    <span class="error-message" id="guestsError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="occasion">Occasion (Optional)</label>
+                    <select id="occasion" name="occasion">
+                        <option value="">Select occasion</option>
+                        <option value="birthday">Birthday</option>
+                        <option value="anniversary">Anniversary</option>
+                        <option value="business">Business</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="special-requests">Special Requests (Optional)</label>
+                    <textarea id="special-requests" name="special-requests" rows="4"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Book Table</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Little Lemon Restaurant. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('bookingForm');
+    const inputs = form.querySelectorAll('input, select, textarea');
+
+    // Set minimum date to today
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+
+    // Set time constraints (e.g., restaurant hours: 11 AM to 10 PM)
+    const timeInput = document.getElementById('time');
+    timeInput.min = '11:00';
+    timeInput.max = '22:00';
+
+    // Validation patterns
+    const patterns = {
+        name: /^[a-zA-Z\s]{2,50}$/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        phone: /^\+?[\d\s-]{10,}$/
+    };
+
+    // Error messages
+    const errorMessages = {
+        name: 'Please enter a valid name (2-50 characters, letters only)',
+        email: 'Please enter a valid email address',
+        phone: 'Please enter a valid phone number (minimum 10 digits)',
+        date: 'Please select a valid date',
+        time: 'Please select a time between 11:00 AM and 10:00 PM',
+        guests: 'Please select the number of guests'
+    };
+
+    // Real-time validation
+    inputs.forEach(input => {
+        input.addEventListener('input', () => {
+            validateInput(input);
+        });
+
+        input.addEventListener('blur', () => {
+            validateInput(input);
+        });
+    });
+
+    // Form submission
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateInput(input)) {
+                isValid = false;
+            }
+        });
+
+        if (isValid) {
+            // Collect form data
+            const formData = new FormData(form);
+            const bookingData = Object.fromEntries(formData.entries());
+            
+            // Here you would typically send the data to a server
+            console.log('Booking data:', bookingData);
+            
+            // Show success message
+            showMessage('Booking submitted successfully! We will contact you shortly.', 'success');
+            form.reset();
+        }
+    });
+
+    function validateInput(input) {
+        const errorElement = document.getElementById(`${input.id}Error`);
+        let isValid = true;
+        let errorMessage = '';
+
+        // Skip validation for optional fields if empty
+        if (!input.required && !input.value) {
+            errorElement.textContent = '';
+            return true;
+        }
+
+        switch (input.id) {
+            case 'name':
+                isValid = patterns.name.test(input.value);
+                errorMessage = errorMessages.name;
+                break;
+            case 'email':
+                isValid = patterns.email.test(input.value);
+                errorMessage = errorMessages.email;
+                break;
+            case 'phone':
+                isValid = patterns.phone.test(input.value);
+                errorMessage = errorMessages.phone;
+                break;
+            case 'date':
+                const selectedDate = new Date(input.value);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                isValid = selectedDate >= today;
+                errorMessage = errorMessages.date;
+                break;
+            case 'time':
+                const time = input.value;
+                isValid = time >= '11:00' && time <= '22:00';
+                errorMessage = errorMessages.time;
+                break;
+            case 'guests':
+                isValid = input.value !== '';
+                errorMessage = errorMessages.guests;
+                break;
+        }
+
+        if (!isValid) {
+            errorElement.textContent = errorMessage;
+            input.classList.add('invalid');
+            input.classList.remove('valid');
+        } else {
+            errorElement.textContent = '';
+            input.classList.add('valid');
+            input.classList.remove('invalid');
+        }
+
+        return isValid;
+    }
+
+    function showMessage(message, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${type}`;
+        messageDiv.textContent = message;
+        
+        // Insert message before the form
+        form.parentNode.insertBefore(messageDiv, form);
+        
+        // Remove message after 5 seconds
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 5000);
+    }
+}); 
+    </script>
+</body>
+</html> 
